@@ -363,8 +363,8 @@ var currentMenu = '';
 	      d.setTime(value.time);
 
 	      display_info += "<div class='event four columns alpha'>";
-	      display_info += "<h5><a href='" + value.event_url + "'>" + value.name + "</a>" + "</h5>";
-	      display_info += "<strong>" d.toLocaleString();;
+	      display_info += "<h5><a href='" + value.event_url + "'>" + value.name + "</a></h5>";
+	      display_info += "<strong>" + d.toLocaleString();;
 	      display_info += "</strong></div>";
 	    });
 	    $("#div2").html(display_info);
