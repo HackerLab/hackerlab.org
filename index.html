@@ -35,8 +35,7 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
-
-
+	<script src="scripts/jquery.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -353,6 +352,24 @@ var currentMenu = '';
 
 
 
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $.getJSON("events.json.txt", function(response){
+	    var display_info = "";
+	    $.each(response.results, function(key, value){
+	      var d = new Date();
+	      d.setTime(value.time);
+
+	      display_info += "<div class='event four columns alpha'>";
+	      display_info += "<h5><a href='" + value.event_url + "'>" + value.name + "</a>" + "</h5>";
+	      display_info += "<strong>" d.toLocaleString();;
+	      display_info += "</strong></div>";
+	    });
+	    $("#div2").html(display_info);
+	  });
+	});
 </script>
 
 
