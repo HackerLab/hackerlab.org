@@ -356,24 +356,28 @@ var currentMenu = '';
 
 </script>
 
+
 <script type="text/javascript">
 	$(document).ready(function(){
-	  $.getJSON("events.json.txt", function(response){
-	    var display_info = "";
-	    $.each(response.results, function(key, value){
-	      var d = new Date();
-	      d.setTime(value.time);
+		$.ajax({
+			dataType: "jsonp",
+			url: "http://api.meetup.com/2/events?status=upcoming&order=time&limited_events=False&group_urlname=HackerLab&desc=false&offset=0&format=json&page=500&fields=&sig_id=85752442&sig=cb240f1353647ac3c0a3e773cd1d0e98f40f352e",
+		  xhrFields: {withCredentials: true},
+		}).done( function(response) {
+			var display_info = "";
+			$.each(response.results, function(key, value){
+				var d = new Date();
+				d.setTime(value.time);
 
-	      display_info += "<div class='event four columns alpha'>";
-	      display_info += "<h5><a href='" + value.event_url + "'>" + value.name + "</a></h5>";
+				display_info += "<div class='event four columns alpha'>";
+	      display_info += "<h5><a href='" + value.event_url + "'>" + value.name + "</a></h5><br>";
 	      display_info += "<strong>" + d.toLocaleString();;
 	      display_info += "</strong></div>";
-	    });
-	    $("#meetups").html(display_info);
-	  });
+			});
+			$("#meetups").html(display_info);
+		});
 	});
 </script>
-
 
 <!-- End Document
 ================================================== -->
