@@ -490,6 +490,28 @@ var currentMenu = '';
 </script>
 
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    $.ajax({
+      dataType: "jsonp",
+      url: "https://jobs.github.com/positions.json?location=San+Francisco&markdown=false",
+      xhrFields: {withCredentials: true},
+    }).done( function(response) {
+      var display_info = "";
+      $.each(response.results, function(key, value){
+        display_info += "<div class='nine columns omega'><table class='giglist'><tr><td class='title'>";
+        display_info += "<h4><a href='" + value.url + "'>" + value.title + "</a></h4>";
+        display_info += "<p><class='source'><a href='" + value.company_url + "' class='company'>" + value.company + "</a>";
+        display_info += "&ndash;<strong class='fulltime'>" + value.type + "</strong></p></td>";
+        display_info += "<td class='meta'><span class='location'>" + value.location + "</span>";
+        display_info += "<span class='when relatize'>" + value.created_at + "</span></td></tr>";
+      });
+      $("#gigs").html(display_info);
+    });
+  });
+</script>
+
+
 <!-- End Document
 ================================================== -->
 </body>
